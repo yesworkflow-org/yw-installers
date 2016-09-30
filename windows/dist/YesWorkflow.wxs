@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  
+    <Product Id="0E5A8D2F-832D-4457-B141-2C69FC4B96BF"
+             Name="YesWorkflow"
+             Language="1033"
+             Version="0.2.1.2"
+             Manufacturer="yesworkflow.org"
+             UpgradeCode="EEB2B5C2-B7D7-4578-A5A5-991DF802F650">
+  
+        <Package InstallerVersion="301"
+                 Compressed="yes"   
+                 InstallScope="perMachine" 
+                 Manufacturer="yesworkflow.org"
+                 Description="YesWorkflow"
+                 Keywords="Scientific,Workflows,Provenance"
+                 Comments="(c) 2015-2016 The YesWorkflow Contributing Institutions" />
+  
+        <MediaTemplate EmbedCab="yes" />
+
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder">
+                <Directory Id="DIR_YESWORKFLOW_FOLDER" Name="YesWorkflow" />
+                    <Directory Id="DIR_APP_FOLDER" Name="app" />
+                    </Directory>
+                    <Directory Id="DIR_BIN_FOLDER" Name="bin" />
+                    </Directory>
+                    <Directory Id="DIR_JRE_FOLDER" Name="jre" />
+                    </Directory>
+                </Directory>
+            </Directory>
+        </Directory>
+
+        <DirectoryRef Id="DIR_BIN_FOLDER">
+            <Component Id="CMP_YWSETUP_CMD_FILE" Guid="E8A58B7B-F031-4548-9BDD-7A6796C84601">
+                <File Id="FILE_YWSETUP_CMD_FILE" Source="bin\ywsetup.cmd" KeyPath="yes"/>
+            </Component>
+            <Component Id="CMP_YWSETUP_BASH_SCRIPT" Guid="E8A58B7B-F031-4548-9BDD-7A6796C84602">
+                <File Id="FILE_YWSETUP_BASH_SCRIPT" Source="bin\ywsetup" KeyPath="yes"/>
+            </Component>
+            <Component Id="CMP_YW_CMD_FILE" Guid="E8A58B7B-F031-4548-9BDD-7A6796C84603">
+                <File Id="FILE_YW_CMD_FILE" Source="bin\yw.cmd" KeyPath="yes"/>
+            </Component>
+            <Component Id="CMP_YW_BASH_SCRIPT" Guid="E8A58B7B-F031-4548-9BDD-7A6796C84604">
+                <File Id="FILE_YW_BASH_SCRIPT" Source="bin\yw" KeyPath="yes"/>
+            </Component>
+        <DirectoryRef>
+      
+  </Product>
+
+  </Product>
+</Wix>
