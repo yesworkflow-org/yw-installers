@@ -11,7 +11,7 @@
         <Package InstallerVersion="301"
                  Compressed="yes"   
                  InstallScope="perMachine" 
-                 Manufacturer="yesworkflow.org"
+                 Manufacturer="The YesWorkflow Contributing Institutions"
                  Description="YesWorkflow"
                  Keywords="Scientific,Workflows,Provenance"
                  Comments="(c) 2015-2016 The YesWorkflow Contributing Institutions" />
@@ -20,33 +20,52 @@
 
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
-                <Directory Id="DIR_YESWORKFLOW_FOLDER" Name="YesWorkflow" />
-                    <Directory Id="DIR_APP_FOLDER" Name="app" />
+                <Directory Id="YESWORKFLOW_FOLDER" Name="YesWorkflow">
+                    <Directory Id="APP_FOLDER" Name="app">
                     </Directory>
-                    <Directory Id="DIR_BIN_FOLDER" Name="bin" />
+                    <Directory Id="BIN_FOLDER" Name="bin">
                     </Directory>
-                    <Directory Id="DIR_JRE_FOLDER" Name="jre" />
+                    <Directory Id="JRE_FOLDER" Name="jre">
                     </Directory>
                 </Directory>
             </Directory>
         </Directory>
 
-        <DirectoryRef Id="DIR_BIN_FOLDER">
-            <Component Id="CMP_YWSETUP_CMD_FILE" Guid="E8A58B7B-F031-4548-9BDD-7A6796C84601">
-                <File Id="FILE_YWSETUP_CMD_FILE" Source="bin\ywsetup.cmd" KeyPath="yes"/>
+        <DirectoryRef Id="BIN_FOLDER">
+            <Component Id="YWSETUP_CMD_COMPONENT" Guid="DAE31A7C-EC49-4086-9E29-AE58FCCDAA6B">
+                <File Id="YWSETUP_CMD_FILE" Source="bin\ywsetup.cmd" KeyPath="yes"/>
             </Component>
-            <Component Id="CMP_YWSETUP_BASH_SCRIPT" Guid="E8A58B7B-F031-4548-9BDD-7A6796C84602">
-                <File Id="FILE_YWSETUP_BASH_SCRIPT" Source="bin\ywsetup" KeyPath="yes"/>
+            <Component Id="YWSETUP_BASH_COMPONENT" Guid="43C2954F-34A5-4332-A959-5CFA9338D6A3">
+                <File Id="YWSETUP_BASH_FILE" Source="bin\ywsetup" KeyPath="yes"/>
             </Component>
-            <Component Id="CMP_YW_CMD_FILE" Guid="E8A58B7B-F031-4548-9BDD-7A6796C84603">
-                <File Id="FILE_YW_CMD_FILE" Source="bin\yw.cmd" KeyPath="yes"/>
+            <Component Id="YW_CMD_COMPONENT" Guid="08877F63-FABF-4812-9F8C-46F8DC4443A9">
+                <File Id="YW_CMD_FILE" Source="bin\yw.cmd" KeyPath="yes"/>
             </Component>
-            <Component Id="CMP_YW_BASH_SCRIPT" Guid="E8A58B7B-F031-4548-9BDD-7A6796C84604">
-                <File Id="FILE_YW_BASH_SCRIPT" Source="bin\yw" KeyPath="yes"/>
+            <Component Id="YW_BASH_COMPONENT" Guid="BE129E0B-24AA-45F2-AEAE-5B15197C6AF1">
+                <File Id="YW_BASH_FILE" Source="bin\yw" KeyPath="yes"/>
             </Component>
-        <DirectoryRef>
-      
+        </DirectoryRef>
+
+        <DirectoryRef Id="APP_FOLDER">
+            <Component Id="YW_JAR_COMPONENT" Guid="E3CA16D1-AFE4-41B1-9680-657D1E5728F0">
+                <File Id="YW_JAR_FILE" Source="app\yesworkflow-0.2.1.2.jar" KeyPath="yes"/>
+            </Component>
+        </DirectoryRef>
+
+        <Feature Id="STARTUP_SCRIPTS_FEATURE" Title="YesWorkflow Startup Scripts" Level="1">
+            <ComponentRef Id="YWSETUP_CMD_COMPONENT" />
+            <ComponentRef Id="YWSETUP_BASH_COMPONENT" />
+            <ComponentRef Id="YW_CMD_COMPONENT" />
+            <ComponentRef Id="YW_BASH_COMPONENT" />
+        </Feature>
+
+        <Feature Id="YESWORKFLOW_JARS_FEATURE" Title="YesWorkflow Jar Files" Level="1">
+            <ComponentRef Id="YW_JAR_COMPONENT" />
+        </Feature>
+
+        <UIRef Id="WixUI_FeatureTree" />
+        <WixVariable Id="WixUILicenseRtf" Value="license.rtf" />
+  
   </Product>
 
-  </Product>
 </Wix>
